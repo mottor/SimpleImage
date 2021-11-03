@@ -250,7 +250,7 @@ class SimpleImage {
         break;
       case 'image/png':
         imagesavealpha($this->image, true);
-        imagepng($this->image);
+        imagepng($this->image, null, ceil($quality * 9 / 100));
         break;
       case 'image/webp':
         // Not all versions of PHP will have webp support enabled
@@ -274,7 +274,7 @@ class SimpleImage {
           );
         }
         imageinterlace($this->image, true);
-        imagebmp($this->image, null, $quality);
+        imagebmp($this->image, null, $quality > 50);
         break;
       default:
         throw new \Exception('Unsupported format: ' . $mimeType, self::ERR_UNSUPPORTED_FORMAT);
